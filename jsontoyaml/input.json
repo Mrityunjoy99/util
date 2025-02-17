@@ -1,0 +1,21 @@
+{
+  "DB_HOST": "loadtest-aurora-postgres-comms-cluster.cluster-cbmqxizsedkh.ap-south-1.rds.amazonaws.com",
+  "DB_PORT": "5432",
+  "DB_NAME": "commsdb",
+  "DB_USER": "commsdb_svc_rw",
+  "DB_PASSWORD": "QiVAS3EGNNMf5twq",
+  "APPSERVER_ADHOCPRODUCTBULKTOPICNAME": "qfpl.test.private.comms-svc.loadtest",
+  "APPSERVER_MARKETINGBULKTOPICNAME": "qfpl.test.private.comms-svc.loadtest",
+  "APPSERVER_REGULARPRODUCTBULKTOPICNAME": "qfpl.test.private.comms-svc.loadtest",
+  "APPSERVER_TRANSACTIONALTOPICNAME": "qfpl.test.private.comms-svc.loadtest",
+  "NOTIFYCONSUMERAPB_CONSUMERCONFIG_GROUPID": "commsworker-qfpl-test-apb-lt",
+  "NOTIFYCONSUMERAPB_CONSUMERCONFIG_TOPICNAME": "qfpl.test.private.comms-svc.loadtest",
+  "NOTIFYCONSUMERMB_CONSUMERCONFIG_GROUPID": "commsworker-qfpl-test-mb-lt",
+  "NOTIFYCONSUMERMB_CONSUMERCONFIG_TOPICNAME": "qfpl.test.private.comms-svc.loadtest",
+  "NOTIFYCONSUMERRPB_CONSUMERCONFIG_GROUPID": "commsworker-qfpl-test-rpb-lt",
+  "NOTIFYCONSUMERRPB_CONSUMERCONFIG_TOPICNAME": "qfpl.test.private.comms-svc.loadtest",
+  "NOTIFYCONSUMERTR_CONSUMERCONFIG_GROUPID": "commsworker-qfpl-test-txn-lt",
+  "NOTIFYCONSUMERTR_CONSUMERCONFIG_TOPICNAME": "qfpl.test.private.comms-svc.loadtest",
+  "LOADTEST_ISENABLED": "true",
+  "RATELIMIT_ENABLED": "true"
+}

@@ -1,1 +1,24 @@
-{"NOTIFYCONSUMERTR_CONSUMERCONFIG_GROUPID":"commsworker-qfpl-development-txn","NOTIFYCONSUMERTR_CONSUMERCONFIG_KAFKABROKER_BOOTSTRAPSERVERS":"localhost:9092","NOTIFYCONSUMERTR_CONSUMERCONFIG_KAFKABROKER_SASLPASSWORD":"password","NOTIFYCONSUMERTR_CONSUMERCONFIG_KAFKABROKER_SASLUSERNAME":"user","NOTIFYCONSUMERTR_CONSUMERCONFIG_TOPICNAME":"qfpl-development-private.comms-svc.transactional"}
+{
+  "DDLCOMMSSVC_SOURCEDBNAME": "commsdb",
+  "DDLCOMMSSVC_SOURCEHOST": "test-aurora-cluster-comms-platform.cluster-cj7foynryeab.ap-south-1.rds.amazonaws.com",
+  "DDLCOMMSSVC_SOURCEPASSWORD": "4vqkPHTcLFWtYa9E",
+  "DDLCOMMSSVC_SOURCEPORT": "3306",
+  "DDLCOMMSSVC_SOURCESCHEMA": "public",
+  "DDLCOMMSSVC_SOURCEUSERNAME": "commspguser",
+  "DDLCOMMSSVC_TARGETDBNAME": "commsdb",
+  "DDLCOMMSSVC_TARGETHOST": "test-aurora-cluster-perf-test.cluster-cj7foynryeab.ap-south-1.rds.amazonaws.com",
+  "DDLCOMMSSVC_TARGETPASSWORD": "perftest1234",
+  "DDLCOMMSSVC_TARGETPORT": "5432",
+  "DDLCOMMSSVC_TARGETUSERNAME": "perftest_rw",
+  "DDLUIDSVC_SOURCEDBNAME": "uid_db",
+  "DDLUIDSVC_SOURCEHOST": "test-aurora-cluster.cluster-ro-cj7foynryeab.ap-south-1.rds.amazonaws.com",
+  "DDLUIDSVC_SOURCEPASSWORD": "7HjHSmMmQo8inJM1",
+  "DDLUIDSVC_SOURCEPORT": "3306",
+  "DDLUIDSVC_SOURCESCHEMA": "public",
+  "DDLUIDSVC_SOURCEUSERNAME": "uid_db_app_user",
+  "DDLUIDSVC_TARGETDBNAME": "uid_db",
+  "DDLUIDSVC_TARGETHOST": "test-aurora-cluster-perf-test.cluster-cj7foynryeab.ap-south-1.rds.amazonaws.com",
+  "DDLUIDSVC_TARGETPASSWORD": "perftest1234",
+  "DDLUIDSVC_TARGETPORT": "5432",
+  "DDLUIDSVC_TARGETUSERNAME": "perftest_rw"
+}
