@@ -1,19 +1,19 @@
 import os
 import requests
 
-# Constants for Confluence API for Personal Account
-# CONFLUENCE_BASE_URL = "https://mrityunjoydey1999.atlassian.net/wiki/rest/api"
-# CONFLUENCE_USERNAME = "mrityunjoydey1999@gmail.com"
-# CONFLUENCE_API_TOKEN = "ATATT3xFfGF0E4eEhQX0hDfVibGkpz4FR2v8kW7u3dq1mVRCfpnfxUlmjAZ6CcW3roJPxQyYT0FI1fMcStmvb3PUQnnJLxZixBimyvKLro1qtVY6mXEzjXD4tKZ-IzZnnQWQgZg8uTXbS4auG9ll9PgNnN_4_l2pAB9HOKBvyiXOnvMp0Za7fzk=0C1CFD3C"
-# BASE_PAGE_ID = "65987"  # The parent page where these pages will be nested
-# SPACE_KEY = '~63de2eb4a5d0c826306b27fb'
 
-# Constants for Confluence API for Slice Account
-CONFLUENCE_BASE_URL = "https://slicepay.atlassian.net/wiki/rest/api"
-CONFLUENCE_USERNAME = "mrityunjoy.dey@sliceit.com"
-CONFLUENCE_API_TOKEN = "ATATT3xFfGF06oOEXR9lGcEeBL8WBkrdX1jRGzfbczu7oKq7yhb_HbbgEso9xViCOXFebovVonC6xnA_7DLloReifUS4rm_0uXyqmSqCSvk9PBCWPrrff6umwxY_6VFvCEUN_kg83W2jW5l9rngEbgp8cNyePIqSWIBleh3mklk_hOICGiJtIbs=5717ED51"
-BASE_PAGE_ID = "3409905432"  # The parent page where these pages will be nested
-SPACE_KEY = 'CBS'
+# Load environment variables from .env file
+import markdown2
+from dotenv import load_dotenv
+
+load_dotenv()
+
+CONFLUENCE_BASE_URL = os.getenv("CONFLUENCE_BASE_URL")
+CONFLUENCE_USERNAME = os.getenv("CONFLUENCE_USERNAME")
+CONFLUENCE_API_TOKEN = os.getenv("CONFLUENCE_API_TOKEN")
+BASE_PAGE_ID = os.getenv("BASE_PAGE_ID")
+SPACE_KEY = os.getenv("SPACE_KEY")
+
 
 def get_markdown_files(directory):
     """Retrieve all markdown (.md) files from a directory."""
