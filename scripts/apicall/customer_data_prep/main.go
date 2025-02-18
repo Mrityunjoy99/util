@@ -1,7 +1,13 @@
 package main
 
 import (
+	"context"
 	"fmt"
+	"os"
+	"os/signal"
+	"sync"
+	"syscall"
+	"time"
 
 	"github.com/mrityunjoy99/util/scripts/apicall/customer_data_prep/db"
 	"github.com/mrityunjoy99/util/scripts/apicall/customer_data_prep/helper"
@@ -16,31 +22,45 @@ func getcustomerBalance(db *gorm.DB, accountId int) model.AccountBalance {
 	return accountBalance
 }
 
-func enhanceCustomerData(db *gorm.DB) {
-	csvWriter, err := helper.NewCSVWriter[model.CustomerAccountDetails]("/Users/mrityunjoydey/Documents/util/scripts/apicall/customer_data_prep/output/cl_1.csv")
+func enhanceCustomerData(db *gorm.DB, ctx context.Context) {
+	csvWriter, err := helper.NewCSVWriter[model.CustomerAccountDetails]("/Users/mrityunjoydey/Documents/util/scripts/apicall/customer_data_prep/output/customer_list.csv")
 	if err != nil {
 		fmt.Println("Error creating CSV writer:", err)
 		return
 	}
 
-	itr, err := helper.NewCSVIterator[model.CustomerAccount]("/Users/mrityunjoydey/Documents/util/scripts/apicall/customer_data_prep/input/cl_1.csv", 10)
+	itr, err := helper.NewCSVIterator[model.CustomerAccount]("/Users/mrityunjoydey/Documents/util/scripts/apicall/customer_data_prep/input/customer_list.csv", 10)
 	if err != nil {
 		fmt.Println("Error creating CSV iterator:", err)
 		return
 	}
 
 	for {
-		chunk, ok := itr.Next()
-		if !ok {
-			break
-		}
-		for _, customer := range chunk {
-			customerAccountDetails := getCustomerAccountDetails(db, customer)
-			err := csvWriter.Write(customerAccountDetails)
-			if err != nil {
-				fmt.Println("Error writing to CSV:", err)
-				return
+		select {
+		case <-ctx.Done():
+			// Received termination signal, exit the loop
+			fmt.Println("Received termination signal. Exiting the loop.")
+			return
+		default:
+			chunk, ok := itr.Next()
+			if !ok {
+				break
 			}
+
+			wg := new(sync.WaitGroup)
+			for _, customer := range chunk {
+				wg.Add(1)
+				go func(customer model.CustomerAccount) {
+					defer wg.Done()
+					customerAccountDetails := getCustomerAccountDetails(db, customer)
+					err := csvWriter.Write(customerAccountDetails)
+					if err != nil {
+						fmt.Println("Error writing to CSV:", err)
+						return
+					}
+				}(customer)
+			}
+			wg.Wait()
 		}
 	}
 }
@@ -54,22 +74,36 @@ func getCustomerAccountDetails(db *gorm.DB, customer model.CustomerAccount) mode
 		AccountId:           customer.AccountId,
 		CheckerClearBalance: balance.CheckerClearBalance,
 		AvailableBalance:    balance.AvailableBalance,
-		LatestTxnDate:       balance.LatestTxnDate,
+		LatestTxnDate:       balance.LatestTxnDate.Format("2006-01-02"),
 		ZeroBalance:         balance.CheckerClearBalance == 0,
 	}
 }
 
 func main() {
+	// Set up signal catching
+	sigs := make(chan os.Signal, 1)
+	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
+
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel() // Ensure that cancel is called when main exits
+
+	// Connect to the database
 	db, err := db.GetDefaultDB()
 	if err != nil {
 		fmt.Println("Error connecting to database:", err)
 		return
 	}
 
-	// Get customer balance
-	// balance := getcustomerBalance(db, 11894518)
-	// balance.Print()
+	// Start enhancing customer data in a goroutine
+	go enhanceCustomerData(db, ctx)
 
-	// Read customer data
-	enhanceCustomerData(db)
+	// Wait for SIGTERM or SIGINT
+	<-sigs
+
+	// After receiving SIGTERM, wait for 5 seconds
+	fmt.Println("Received termination signal. Waiting for 5 seconds...")
+	cancel()
+	time.Sleep(5 * time.Second)
+
+	fmt.Println("Graceful shutdown complete.")
 }
