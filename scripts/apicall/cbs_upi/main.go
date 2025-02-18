@@ -3,43 +3,42 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"math/rand"
 	"net/http"
-	"sync"
 	"time"
+)
+
+const (
+	RPS                          int           = 1
+	TestDuration                 time.Duration = 5 * time.Second
+	RequestPerAccountInTimeUnit1 int           = 1
+	TimeUnit1                    time.Duration = 5 * time.Second
+	BaseUrl                      string        = "https://api.uat-nebank.com/banking"
+	Token                        string        = "NESFB_d2fa1ebe-6d99-4394-8841-309d02e081f0_NESFB-SLICE"
 )
 
 // Generate a random RRN (reversal reference number)
 func generateRRN() int {
 	// Seed the random number generator
-	rand.Seed(time.Now().UnixNano())
+	rand.NewSource(time.Now().UnixNano())
 	// Generate a random RRN (8-digit number)
 	return rand.Intn(99999999-10000000) + 10000000
 }
 
 func generateTransactionOrderId() int64 {
 	// Seed the random number generator
-	rand.Seed(time.Now().UnixNano())
-
+	rand.NewSource(time.Now().UnixNano())
 	// Generate a random 8 to 12 digit transaction order ID
 	// Adjust the range to meet your requirements
 	return rand.Int63n(899999999999) + 100000000000 // 12-digit random number
 }
 
-// Function to make an HTTP request
-func makeRequest(wg *sync.WaitGroup, client *http.Client, url string, header map[string]string) {
-	defer wg.Done()
-
-	// Generate a random RRN
-	rrn := generateRRN()
-	txnId := generateTransactionOrderId()
-
-	// Create the request body with the generated RRN
+func constructRequest(rrn int, txnId int64, accountNumber string) http.Request {
 	requestBody := fmt.Sprintf(`{
 		"transactionOrderId": %d,
-		"principalAccountNumber": "50220000553464",
+		"principalAccountNumber": "%s",
 		"reversal": false,
 		"transactionNature": "CREDIT",
 		"amountInPaisa": "10000",
@@ -47,22 +46,32 @@ func makeRequest(wg *sync.WaitGroup, client *http.Client, url string, header map
 		"payeeVpa": "9113764212@ybl",
 		"remark": "BIS_test",
 		"rrn": %d
-	}`, txnId, rrn)
+	}`, txnId, accountNumber, rrn)
 
-	// Create the HTTP request
-	req, err := http.NewRequest("POST", url, bytes.NewBuffer([]byte(requestBody)))
+	req, err := http.NewRequest("POST", BaseUrl+"/bsgaccounting-api/v2/transfer/upi", bytes.NewBuffer([]byte(requestBody)))
 	if err != nil {
 		log.Printf("Error creating request: %v", err)
-		return
+		return http.Request{}
 	}
 
-	// Set headers
-	for key, value := range header {
-		req.Header.Set(key, value)
-	}
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("Authorization", Token)
 
-	// Execute the request
-	resp, err := client.Do(req)
+	return *req
+}
+
+func getAccountNumber() string {
+	return "50220000553464"
+}
+
+func execueOneRequest(client *http.Client) {
+	rrn := generateRRN()
+	txnId := generateTransactionOrderId()
+	accountNumber := getAccountNumber()
+
+	req := constructRequest(rrn, txnId, accountNumber)
+
+	resp, err := client.Do(&req)
 	if err != nil {
 		log.Printf("Error executing request: %v", err)
 		return
@@ -70,7 +79,7 @@ func makeRequest(wg *sync.WaitGroup, client *http.Client, url string, header map
 	defer resp.Body.Close()
 
 	// Read the response body
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		log.Printf("Error reading response: %v", err)
 		return
@@ -81,31 +90,7 @@ func makeRequest(wg *sync.WaitGroup, client *http.Client, url string, header map
 }
 
 func main() {
-	// Define the URL and headers
-	url := "http://localhost:9020/bsgaccounting-api/v2/transfer/upi"
-	// url := "https://api.uat-nebank.com/banking/bsgaccounting-api/v2/transfer/upi"
-	headers := map[string]string{
-		"Content-Type":  "application/json",
-		"Authorization": "NESFB_7be0ed97-f2fa-4666-b894-1f8c554b0a83_NESFB-SLICE",
-	}
-
 	// Create an HTTP client
 	client := &http.Client{}
-
-	// Define the number of concurrent requests you want to send
-	numRequests := 10
-
-	// Create a wait group to wait for all requests to finish
-	var wg sync.WaitGroup
-
-	// Fire the concurrent requests
-	for i := 0; i < numRequests; i++ {
-		wg.Add(1)
-		go makeRequest(&wg, client, url, headers)
-	}
-
-	// Wait for all requests to complete
-	wg.Wait()
-
-	fmt.Println("All requests have been processed.")
+	execueOneRequest(client)
 }
