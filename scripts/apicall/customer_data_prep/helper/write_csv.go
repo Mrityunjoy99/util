@@ -17,9 +17,19 @@ type CSVWriter[T any] struct {
 	mutex      sync.Mutex
 }
 
-// NewCSVWriter initializes a new CSVWriter, creating or overwriting the file
-func NewCSVWriter[T any](filename string) (*CSVWriter[T], error) {
-	file, err := os.Create(filename)
+func NewCSVWriter[T any](filename string, appendMode bool) (*CSVWriter[T], error) {
+	var file *os.File
+	var err error
+
+	// Choose file mode based on the appendMode flag
+	if appendMode {
+		// Open file for appending, create if not exists
+		file, err = os.OpenFile(filename, os.O_APPEND|os.O_CREATE|os.O_RDWR, 0644)
+	} else {
+		// Create or override file
+		file, err = os.Create(filename)
+	}
+
 	if err != nil {
 		return nil, err
 	}
@@ -30,9 +40,13 @@ func NewCSVWriter[T any](filename string) (*CSVWriter[T], error) {
 	}
 
 	writer := csv.NewWriter(file)
-	if err := writer.Write(columns); err != nil {
-		file.Close()
-		return nil, err
+
+	// If file is empty and we are overriding, write the headers
+	if !appendMode {
+		if err := writer.Write(columns); err != nil {
+			file.Close()
+			return nil, err
+		}
 	}
 
 	return &CSVWriter[T]{
@@ -42,6 +56,7 @@ func NewCSVWriter[T any](filename string) (*CSVWriter[T], error) {
 		columnsSet: createColumnSet(columns),
 	}, nil
 }
+
 
 // Write appends a new row to the CSV file, ensuring column consistency
 func (cw *CSVWriter[T]) Write(obj T) error {

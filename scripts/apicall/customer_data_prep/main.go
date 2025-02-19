@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"os"
 	"os/signal"
@@ -11,6 +12,7 @@ import (
 
 	"github.com/mrityunjoy99/util/scripts/apicall/customer_data_prep/db"
 	"github.com/mrityunjoy99/util/scripts/apicall/customer_data_prep/helper"
+	"github.com/mrityunjoy99/util/scripts/apicall/customer_data_prep/metadata"
 	"github.com/mrityunjoy99/util/scripts/apicall/customer_data_prep/model"
 	"gorm.io/gorm"
 )
@@ -23,46 +25,129 @@ func getcustomerBalance(db *gorm.DB, accountId int) model.AccountBalance {
 }
 
 func enhanceCustomerData(db *gorm.DB, ctx context.Context) {
-	csvWriter, err := helper.NewCSVWriter[model.CustomerAccountDetails]("/Users/mrityunjoydey/Documents/util/scripts/apicall/customer_data_prep/output/customer_list.csv")
-	if err != nil {
-		fmt.Println("Error creating CSV writer:", err)
-		return
+	// Define file paths for input, output, and metadata (JSON file)
+	inputFilePath := "/Users/mrityunjoydey/Documents/util/scripts/apicall/customer_data_prep/input/customer_list.csv"
+	outputFilePath := "/Users/mrityunjoydey/Documents/util/scripts/apicall/customer_data_prep/output/customer_list.csv"
+	metadataFilePath := "/Users/mrityunjoydey/Documents/util/scripts/apicall/customer_data_prep/metadata/metadata.json"
+	chenkSize := 100
+
+	// Try to read the currentSeek from the metadata file
+	var (
+		currentSeek int64 = 0
+		csvWriter   *helper.CSVWriter[model.CustomerAccountDetails]
+		err         error
+	)
+	if metadata, err := readMetadata(metadataFilePath); err == nil {
+		// If metadata file exists and is valid, use the saved currentSeek
+		currentSeek = metadata.CurrentSeek
+	} else {
+		// If reading the metadata file fails, we consider it as failure and start from the beginning
+		fmt.Println("Error reading metadata file or invalid data, starting from the beginning.")
 	}
 
-	itr, err := helper.NewCSVIterator[model.CustomerAccount]("/Users/mrityunjoydey/Documents/util/scripts/apicall/customer_data_prep/input/customer_list.csv", 10)
+	// Step 1: Start reading from the beginning if currentSeek is invalid
+	if currentSeek == 0 {
+		// Override the output file, start fresh from the beginning
+		csvWriter, err = helper.NewCSVWriter[model.CustomerAccountDetails](outputFilePath, false)
+		if err != nil {
+			fmt.Println("Error creating CSV writer:", err)
+			return
+		}
+	} else {
+		// Step 2: Read from the given seek, open the output file in append mode
+		csvWriter, err = helper.NewCSVWriter[model.CustomerAccountDetails](outputFilePath, true)
+		if err != nil {
+			fmt.Println("Error creating CSV writer:", err)
+			return
+		}
+	}
+
+	itr, err := helper.NewCSVIterator[model.CustomerAccount](inputFilePath, chenkSize, currentSeek)
 	if err != nil {
 		fmt.Println("Error creating CSV iterator:", err)
 		return
 	}
 
+	// Process the input file and write to the output file
+	processCSVChunks(ctx, db, itr, csvWriter, metadataFilePath)
+}
+
+// Helper function to process CSV chunks and handle termination signal
+func processCSVChunks(ctx context.Context, db *gorm.DB, itr *helper.Iterator[model.CustomerAccount], csvWriter *helper.CSVWriter[model.CustomerAccountDetails], metadataFilePath string) {
 	for {
 		select {
 		case <-ctx.Done():
-			// Received termination signal, exit the loop
-			fmt.Println("Received termination signal. Exiting the loop.")
+			// Received termination signal, exit the loop and save current seek
+			fmt.Println("Received termination signal. Saving current seek position.")
+			// Save the current seek position to the metadata JSON file
+			metadata := metadata.Metadata{
+				CurrentSeek: itr.GetCurrentRecord(),
+			}
+
+			err := writeMetadata(metadataFilePath, metadata)
+			if err != nil {
+				fmt.Println("Error saving current seek position:", err)
+			}
 			return
 		default:
+			// Fetch a chunk from the iterator
 			chunk, ok := itr.Next()
 			if !ok {
+				// No more data to process
 				break
 			}
 
+			// Process the chunk in parallel
 			wg := new(sync.WaitGroup)
 			for _, customer := range chunk {
 				wg.Add(1)
 				go func(customer model.CustomerAccount) {
 					defer wg.Done()
+					// Get customer account details
 					customerAccountDetails := getCustomerAccountDetails(db, customer)
 					err := csvWriter.Write(customerAccountDetails)
 					if err != nil {
 						fmt.Println("Error writing to CSV:", err)
-						return
 					}
 				}(customer)
 			}
 			wg.Wait()
 		}
 	}
+}
+
+// Read the metadata from the JSON file
+func readMetadata(metadataFilePath string) (metadata.Metadata, error) {
+	var metadata metadata.Metadata
+	file, err := os.Open(metadataFilePath)
+	if err != nil {
+		return metadata, err
+	}
+	defer file.Close()
+
+	decoder := json.NewDecoder(file)
+	err = decoder.Decode(&metadata)
+	if err != nil {
+		return metadata, fmt.Errorf("failed to decode metadata JSON: %w", err)
+	}
+	return metadata, nil
+}
+
+// Write the metadata to the JSON file
+func writeMetadata(metadataFilePath string, metadata metadata.Metadata) error {
+	file, err := os.Create(metadataFilePath)
+	if err != nil {
+		return fmt.Errorf("failed to create metadata file: %w", err)
+	}
+	defer file.Close()
+
+	encoder := json.NewEncoder(file)
+	encoder.SetIndent("", "  ") // Pretty print JSON
+	err = encoder.Encode(metadata)
+	if err != nil {
+		return fmt.Errorf("failed to encode metadata to JSON: %w", err)
+	}
+	return nil
 }
 
 func getCustomerAccountDetails(db *gorm.DB, customer model.CustomerAccount) model.CustomerAccountDetails {

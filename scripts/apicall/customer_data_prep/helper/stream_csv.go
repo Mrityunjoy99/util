@@ -10,13 +10,18 @@ import (
 )
 
 type Iterator[T any] struct {
-	reader    *csv.Reader
-	file      *os.File
-	headers   []string
-	chunkSize int
+	reader        *csv.Reader
+	file          *os.File
+	headers       []string
+	chunkSize     int
+	currentRecord int64
 }
 
-func NewCSVIterator[T any](filename string, chunkSize int) (*Iterator[T], error) {
+func (it *Iterator[T]) GetCurrentRecord() int64 {
+	return it.currentRecord
+}
+
+func NewCSVIterator[T any](filename string, chunkSize int, currentRecord int64) (*Iterator[T], error) {
 	file, err := os.Open(filename)
 	if err != nil {
 		return nil, fmt.Errorf("error opening file: %w", err)
@@ -29,46 +34,27 @@ func NewCSVIterator[T any](filename string, chunkSize int) (*Iterator[T], error)
 		return nil, fmt.Errorf("error reading CSV header: %w", err)
 	}
 
+	// Skip records if currentRecord is not 0
+	for i := int64(0); i < currentRecord; i++ {
+		_, err := reader.Read() // Skip a record
+		if err == io.EOF {
+			file.Close()
+			return nil, fmt.Errorf("EOF reached while skipping records")
+		}
+		if err != nil {
+			file.Close()
+			return nil, fmt.Errorf("error while skipping records: %w", err)
+		}
+	}
+
 	return &Iterator[T]{
-		reader:    reader,
-		file:      file,
-		headers:   headers,
-		chunkSize: chunkSize,
+		reader:        reader,
+		file:          file,
+		headers:       headers,
+		chunkSize:     chunkSize,
+		currentRecord: currentRecord,
 	}, nil
 }
-
-// func (it *Iterator[T]) Next() ([]T, bool) {
-// 	var chunk []T
-// 	for i := 0; i < it.chunkSize; i++ {
-// 		row, err := it.reader.Read()
-// 		if err == io.EOF {
-// 			break
-// 		}
-// 		if err != nil {
-// 			fmt.Println("Error reading row:", err)
-// 			break
-// 		}
-// 		if len(row) < len(it.headers) {
-// 			continue
-// 		}
-
-// 		objMap := make(map[string]string)
-// 		for j, header := range it.headers {
-// 			objMap[header] = row[j]
-// 		}
-
-// 		var obj T
-// 		jsonData, _ := json.Marshal(objMap)
-// 		json.Unmarshal(jsonData, &obj)
-// 		chunk = append(chunk, obj)
-// 	}
-
-// 	if len(chunk) == 0 {
-// 		it.file.Close()
-// 		return nil, false
-// 	}
-// 	return chunk, true
-// }
 
 func (it *Iterator[T]) Next() ([]T, bool) {
 	var chunk []T
@@ -99,6 +85,9 @@ func (it *Iterator[T]) Next() ([]T, bool) {
 
 		chunk = append(chunk, obj)
 	}
+
+	// Update the current record position in the iterator
+	it.currentRecord += int64(len(chunk))
 
 	if len(chunk) == 0 {
 		it.file.Close()
