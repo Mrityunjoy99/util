@@ -1,0 +1,39 @@
+{
+  "key": "CBS_TXN_REQUEST",
+  "data": {
+    "srcTxnId": "019329a9-37fc-7277-8ea6-3dea57433b01",
+    "parentSrcTxnId": "019329a9-2dae-7715-8b29-410afa0347bd",
+    "type": "REFUND",
+    "upiRequestId": "NEF72586ffc7fc34743b879ff5fc1f8a800",
+    "rrn": "431804039901",
+    "amountInRupees": 1.0,
+    "purposeCode": "00",
+    "initiationMode": "00",
+    "originalUpiRequestId": "NEF72586ffc7fc34743b879ff5fc1f8a8b9",
+    "originalTransactionType": "DEBIT",
+    "originalRRN": "431925542419",
+    "mandateId": null,
+    "payerVpa": "9064635902@nef",
+    "debitAccountDetails": {
+      "accountNumber": "000225041006909",
+      "accType": "SAVINGS",
+      "ifsc": "NESF0000002",
+      "mcc": "1234",
+      "isVerifiedMerchant": false,
+      "cbsName": "Bryan Bobi Jacob"
+    },
+    "payeeVpa": "muneesh8@nef",
+    "creditAccountDetails": {
+      "accountNumber": "000225041009236",
+      "accType": "SAVINGS",
+      "ifsc": "NESF0000001",
+      "mcc": "0000",
+      "isVerifiedMerchant": false,
+      "cbsName": "Bryan Bobi Jacob"
+    },
+    "note": "UPI",
+    "mandateTransaction": false
+  },
+  "version": null,
+  "kafkaMessageMetaData": { "programName": null, "tenantName": "gipl" }
+}

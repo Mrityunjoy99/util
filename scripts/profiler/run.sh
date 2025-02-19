@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Define a common prefix path for profiles
-prefix_path="/Users/mrityunjoydey/Documents/comms/loadtest/18-10-23/cpu_profile/bulk_test_1"
+prefix_path="/Users/mrityunjoydey/Documents/comms/memory_leak"
 
 # Define an array of profile names
-profiles=("profile_1" "profile_2" "profile_3" "profile_4" "profile_5" "profile_6" "profile_7" "profile_8")
+profiles=("heap_01" "heap_02" "heap_03")
 
 # Determine the starting port
 start_port=10001
@@ -32,7 +32,7 @@ pids=()
 # Start pprof HTTP servers in the background and capture their PIDs
 for profile in "${profiles[@]}"; do
   port=$((start_port++))
-  go tool pprof -http=localhost:$port ${prefix_path}/${profile} &
+  go tool pprof -http=localhost:$port ${prefix_path}/${profile} -noinlines &
   pids+=($!)
 done
 

@@ -1,0 +1,92 @@
+SP Name,Count,Dependent Databases,Database Count,Remarks
+sp_account_statement,6,"BSGDEEPFREEZE, BSGCORE, BSGTD, BSGADMIN, BSGACCOUNTING",5.0,
+sp_account_info_balances,4,"BSGMASTER, BSGLOAN, BSGDEEPFREEZE, BSGCORE, BSGACCOUNTING, BSGCRM",6.0,
+sp_account_mini_statement,3,"BSGCORE, BSGACCOUNTING, BSGDEEPFREEZE",3.0,
+sp_get_account_info,3,"BSGLOAN, BSGCORE, BSGTD, BSGACCOUNTING, BSGCRM",5.0,
+sp_product_info_balances,2,"BSGCORE, BSGACCOUNTING, BSGTURINGREPORTS, BSGDEEPFREEZE",4.0,
+statement_search,2,"BSGCORE, BSGACCOUNTING, BSGDEEPFREEZE",3.0,
+sp_casa_minimum_bal_charges,2,"BSGCORE, BSGADMIN, BSGACCOUNTING",3.0,
+getactiveaccountsbymobileno,2,"BSGMASTER, BSGCRM, BSGLOAN, BSGCORE",4.0,
+sp_loan_penal_interest_accrual,2,"BSGLOAN, MASTER, BSGACCOUNTING, BSGTURING",4.0,
+loan_auto_recovery_sp,2,"BSGCORE, BSGLOAN, BSGADMIN, BSGACCOUNTING",4.0,
+sp_casa_interest_accrual,2,"MASTER, BSGDEEPFREEZE, BSGCORE, BSGTD, BSGADMIN, BSGACCOUNTING, BSGTURING",7.0,
+sp_duplicate_master_entries,2,"BSGCORE, BSGCRM, BSGACCOUNTING, BSGTD",4.0,
+sp_td_interest_exception,2,"BSGCORE, BSGADMIN, BSGACCOUNTING, BSGTD",4.0,
+sp_loan_interest_exception,2,"BSGLOAN, BSGADMIN, BSGACCOUNTING",3.0,
+sp_loadaccountsforcharge,1,BSGACCOUNTING,1.0,
+sp_getdetailsbytxnrefno,1,"BSGCORE, BSGACCOUNTING",2.0,
+sp_product_statement,1,"BSGCORE, BSGACCOUNTING, BSGTURINGREPORTS, BSGDEEPFREEZE",4.0,
+sp_browse_transaction,1,"BSGMASTER, BSGTURINGREPORTS, BSGCORE, BSGADMIN, BSGACCOUNTING, BSGCRM",6.0,
+neft_rtgs_register,1,"BSGMASTER, BSGTURINGREPORTS, BSGDEEPFREEZE, BSGCORE, BSGADMIN, BSGACCOUNTING",6.0,
+sp_backup_bod,1,"BSGDEEPFREEZE, MASTER, BSGTURING",3.0,
+sp_change_account_status,1,"BSGTURINGREPORTS, BSGDEEPFREEZE, BSGCORE, BSGTD, BSGACCOUNTING",5.0,
+sp_account_for_status_change,1,"BSGCORE, BSGTURINGREPORTS, BSGACCOUNTING, BSGDEEPFREEZE",4.0,
+sp_pending_charges,1,BSGACCOUNTING,1.0,
+sp_rectify_consistency,1,"BSGACCOUNTING, BSGTURING",2.0,
+sp_calculate_charges_casa_daily,1,"BSGMASTER, BSGLOAN, BSGCORE, BSGACCOUNTING, BSGCRM, BSGREMITTANCE",6.0,
+zerobalance_productcheck,1,"BSGCORE, BSGADMIN",2.0,
+getsmslist,1,"BSGLOAN, BSGTURINGREPORTS, BSGDEEPFREEZE, BSGCORE, BSGTD, BSGADMIN, BSGACCOUNTING, BSGCRM",8.0,
+getavgmonthlybalance,1,"BSGCORE, MASTER, BSGACCOUNTING",3.0,
+sp_rectify_balance,1,"BSGCORE, BSGACCOUNTING",2.0,
+checkdailytrialbalancediff,1,"BSGTURINGREPORTS, BSGACCOUNTING",2.0,
+sp_getaccountdetails_upi,1,"BSGCORE, BSGCRM, BSGLOAN, BSGMASTER",4.0,
+sp_get_bsbda_rule_config,1,BSGCORE,1.0,
+sp_get_bsbda_product_id,1,BSGCORE,1.0,
+sp_last_transaction,1,"BSGCORE, BSGACCOUNTING, BSGDEEPFREEZE",3.0,
+sp_insert_td_customer_interest_tds,1,"BSGACCOUNTING, BSGTD",2.0,
+sp_get_old_account_list,1,BSGCORE,1.0,
+sp_loan_interest_accrual,1,"BSGLOAN, MASTER, BSGACCOUNTING, BSGTURING",4.0,
+sp_get_overdue_details,1,"BSGLOAN, BSGACCOUNTING",2.0,
+sp_interest_application_loan,1,"BSGADMIN, BSGACCOUNTING",2.0,
+sp_interest_application_cc,1,"BSGADMIN, BSGACCOUNTING",2.0,
+sp_npa_borrower,1,"BSGCORE, BSGCRM, BSGLOAN, BSGACCOUNTING",4.0,
+sp_get_reschedule_product_list,1,BSGLOAN,1.0,
+sp_get_active_account_list_from_product,1,BSGLOAN,1.0,
+sp_co_demand_generation,1,"BSGLOAN, BSGADMIN, BSGACCOUNTING",3.0,
+calculate_overdue_loan,1,"BSGLOAN, BSGACCOUNTING",2.0,
+loan_cc_asset_classification_list,1,"BSGCRM, BSGLOAN, BSGADMIN, BSGACCOUNTING",4.0,
+loan_npa_identifcation_task_list,1,"BSGLOAN, BSGADMIN, BSGACCOUNTING, BSGDEEPFREEZE",4.0,
+sp_insert_casa_balances,1,"BSGCORE, BSGACCOUNTING",2.0,
+sp_insert_loan_balances,1,"BSGLOAN, BSGACCOUNTING",2.0,
+sp_get_accounts_for_folio_charges,1,"BSGLOAN, MASTER, BSGDEEPFREEZE, BSGCORE, BSGADMIN, BSGACCOUNTING",6.0,
+sp_get_accounts_for_maintenance_charges,1,"BSGLOAN, BSGCORE, BSGADMIN, BSGACCOUNTING, BSGCRM",5.0,
+sp_get_accounts_for_debitcard_charges,1,"BSGMASTER, BSGLOAN, BSGCORE, BSGADMIN, BSGACCOUNTING, BSGREMITTANCE",6.0,
+sp_get_loan_cc_accounts,1,"BSGLOAN, MASTER, BSGCORE, BSGADMIN, BSGACCOUNTING",5.0,
+get_casa_int_application_accs,1,"BSGCORE, BSGADMIN, BSGACCOUNTING",3.0,
+sp_casa_inoperative_bal_charges,1,"BSGCORE, BSGACCOUNTING",2.0,
+sp_td_interest_application,1,"BSGCORE, BSGTD, BSGADMIN, BSGACCOUNTING, BSGCRM",5.0,
+sp_insert_td_balances,1,"BSGCORE, BSGACCOUNTING",2.0,
+sp_td_interest_application_bucketing,1,"BSGACCOUNTING, BSGTD",2.0,
+update_loan_repayment_chart_post_interest_application,1,"BSGLOAN, BSGACCOUNTING",2.0,
+sp_interest_accrual_pnr_pl_posting_pre_processing,1,"BSGCORE, BSGLOAN, BSGACCOUNTING, BSGTD",4.0,
+sp_update_policy_renew_details,1,"BSGCORE, BSGADMIN, BSGACCOUNTING",3.0,
+npa_provision_preprocessing,1,"BSGCORE, BSGLOAN, BSGACCOUNTING",3.0,
+sp_turing_clean,1,BSGACCOUNTING,1.0,
+sp_casa_balance_check,1,"BSGACCOUNTING, BSGTURING",2.0,
+sp_dds_closure_calculation,1,"BSGCORE, BSGACCOUNTING",2.0,
+update_product_and_internal_account_balance,1,"BSGCORE, BSGACCOUNTING",2.0,
+sp_get_count_non_empty_preprocessing_tables,1,BSGACCOUNTING,1.0,
+sp_verify_pl_account,1,"BSGCORE, BSGLOAN, BSGTD",3.0,
+sp_casa_interest_exception,1,"BSGCORE, BSGACCOUNTING",2.0,
+sp_reset_accrual,1,"BSGLOAN, BSGACCOUNTING, BSGTD",3.0,
+sp_qa_td_interest_provided,1,,,error: sp not present
+sp_get_sweep_out_accounts,1,,,error: sp not present
+sp_get_sweep_in_params,1,,,error: sp not present
+sp_insert_settlement_popup_master,1,,,error: sp not present
+sp_get_pending_details,1,,,error: sp not present
+po_product_individual_balance_check,1,,,error: sp not present
+ir_product_individual_balance_check,1,,,error: sp not present
+interestpay_product_individual_balance_check,1,,,error: sp not present
+tdsrec_product_individual_balance_check,1,,,error: sp not present
+sp_get_account_list_for_cust,1,,,error: sp not present
+sp_get_customer_wise_all_td_balance,1,,,error: sp not present
+sp_loan_overdue_list,1,,,error: sp not present
+sp_interest_,1,,,error: sp not present
+sp_advance_recovery,1,,,error: sp not present
+sp_npa_accounts_details,1,,,error: sp not present
+sp_loan_od_interest_accrual,1,,,error: sp not present
+sp_calculate_overdue,1,,,error: sp not present
+sp_in_operative_marking,1,,,error: sp not present
+sp_dormant_marking,1,,,error: sp not present
+sp_batch_insert_transaction_master,1,,,error: sp not present
+sp_batch_insert_order_request,1,,,error: sp not present

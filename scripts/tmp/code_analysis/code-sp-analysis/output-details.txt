@@ -1,0 +1,459 @@
+Total Unique Procedures: 91
+Total Procedure Occurrences: 113
+
+Procedure Name: sp_account_statement
+Count: 6
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 543, 546, 655, 657, 669, 673
+
+Procedure Name: sp_Account_Info_Balances
+Count: 4
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 559, 562, 677, 681
+
+Procedure Name: sp_account_mini_statement
+Count: 3
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 554, 557, 685
+
+Procedure Name: sp_get_account_info
+Count: 3
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/hash/HashDataRepositoryImpl.java: Lines 56, 60, 64
+
+Procedure Name: sp_product_info_balances
+Count: 2
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 565, 569
+
+Procedure Name: statement_search
+Count: 2
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 660, 664
+
+Procedure Name: sp_casa_minimum_bal_charges
+Count: 2
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 713
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/bulk/BulkInsertRepositoryImpl.java: Lines 145
+
+Procedure Name: getActiveAccountsByMobileNo
+Count: 2
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 744, 820
+
+Procedure Name: sp_loan_penal_interest_accrual
+Count: 2
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/loan/LoanRepositoryImpl.java: Lines 205, 314
+
+Procedure Name: loan_auto_recovery_sp
+Count: 2
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/loan/LoanRepositoryImpl.java: Lines 334, 338
+
+Procedure Name: sp_casa_interest_accrual
+Count: 2
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/casa/CasaRepositoryImpl.java: Lines 105, 106
+
+Procedure Name: sp_duplicate_master_entries
+Count: 2
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/branchHandOver/BranchHandOverRepositoryImpl.java: Lines 89, 91
+
+Procedure Name: sp_td_interest_exception
+Count: 2
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/branchHandOver/BranchHandOverRepositoryImpl.java: Lines 124, 127
+
+Procedure Name: sp_loan_interest_exception
+Count: 2
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/branchHandOver/BranchHandOverRepositoryImpl.java: Lines 172, 175
+
+Procedure Name: sp_LoadAccountsForCharge
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/ChargesRepositoryImpl.java: Lines 92
+
+Procedure Name: sp_getDetailsByTxnRefNo
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/ChargesRepositoryImpl.java: Lines 94
+
+Procedure Name: sp_Product_Statement
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 549
+
+Procedure Name: sp_browse_transaction
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 573
+
+Procedure Name: neft_rtgs_register
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 578
+
+Procedure Name: sp_backup_bod
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 587
+
+Procedure Name: sp_change_account_status
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 648
+
+Procedure Name: sp_account_for_status_change
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 652
+
+Procedure Name: sp_pending_charges
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 688
+
+Procedure Name: sp_rectify_consistency
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 697
+
+Procedure Name: sp_calculate_charges_casa_daily
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 702
+
+Procedure Name: sp_qa_td_interest_provided
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 706
+
+Procedure Name: zeroBalance_ProductCheck
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 709
+
+Procedure Name: getSMSList
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 736
+
+Procedure Name: getAvgMonthlyBalance
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 739
+
+Procedure Name: sp_rectify_balance
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 747
+
+Procedure Name: checkDailyTrialBalanceDiff
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 750
+
+Procedure Name: sp_get_sweep_out_accounts
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 757
+
+Procedure Name: sp_get_sweep_in_params
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 758
+
+Procedure Name: sp_insert_settlement_popup_master
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 803
+
+Procedure Name: sp_get_pending_details
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 806
+
+Procedure Name: PO_Product_Individual_Balance_Check
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 811
+
+Procedure Name: IR_Product_Individual_Balance_Check
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 814
+
+Procedure Name: InterestPay_Product_Individual_Balance_Check
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 817
+
+Procedure Name: sp_getAccountDetails_UPI
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 829
+
+Procedure Name: TDSRec_Product_Individual_Balance_Check
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 831
+
+Procedure Name: sp_get_account_list_for_cust
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 836
+
+Procedure Name: sp_get_customer_wise_all_td_balance
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 840
+
+Procedure Name: sp_get_bsbda_rule_config
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 856
+
+Procedure Name: sp_get_bsbda_product_id
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 859
+
+Procedure Name: sp_last_transaction
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 869
+
+Procedure Name: sp_insert_td_customer_interest_tds
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 873
+
+Procedure Name: sp_get_old_account_list
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/cbs/CbsRepositoryImpl.java: Lines 875
+
+Procedure Name: sp_loan_interest_accrual
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/loan/LoanRepositoryImpl.java: Lines 202
+
+Procedure Name: sp_loan_overdue_list
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/loan/LoanRepositoryImpl.java: Lines 209
+
+Procedure Name: sp_get_overdue_details
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/loan/LoanRepositoryImpl.java: Lines 213
+
+Procedure Name: sp_interest_
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/loan/LoanRepositoryImpl.java: Lines 217
+
+Procedure Name: sp_interest_application_loan
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/loan/LoanRepositoryImpl.java: Lines 224
+
+Procedure Name: sp_interest_application_cc
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/loan/LoanRepositoryImpl.java: Lines 239
+
+Procedure Name: sp_Npa_Borrower
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/loan/LoanRepositoryImpl.java: Lines 245
+
+Procedure Name: sp_advance_recovery
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/loan/LoanRepositoryImpl.java: Lines 273
+
+Procedure Name: sp_npa_accounts_details
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/loan/LoanRepositoryImpl.java: Lines 276
+
+Procedure Name: sp_loan_od_interest_accrual
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/loan/LoanRepositoryImpl.java: Lines 303
+
+Procedure Name: sp_calculate_overdue
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/loan/LoanRepositoryImpl.java: Lines 325
+
+Procedure Name: sp_get_reschedule_product_list
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/loan/LoanRepositoryImpl.java: Lines 360
+
+Procedure Name: sp_get_active_account_list_from_product
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/loan/LoanRepositoryImpl.java: Lines 372
+
+Procedure Name: sp_co_demand_generation
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/loan/LoanRepositoryImpl.java: Lines 376
+
+Procedure Name: CALCULATE_OVERDUE_LOAN
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/loan/LoanRepositoryImpl.java: Lines 380
+
+Procedure Name: LOAN_CC_ASSET_CLASSIFICATION_LIST
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/loan/LoanRepositoryImpl.java: Lines 384
+
+Procedure Name: LOAN_NPA_IDENTIFCATION_TASK_LIST
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/loan/LoanRepositoryImpl.java: Lines 387
+
+Procedure Name: sp_insert_casa_balances
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/bulk/BulkInsertRepositoryImpl.java: Lines 112
+
+Procedure Name: sp_insert_loan_balances
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/bulk/BulkInsertRepositoryImpl.java: Lines 115
+
+Procedure Name: sp_get_accounts_for_folio_charges
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/bulk/BulkInsertRepositoryImpl.java: Lines 118
+
+Procedure Name: sp_get_accounts_for_maintenance_charges
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/bulk/BulkInsertRepositoryImpl.java: Lines 122
+
+Procedure Name: sp_get_accounts_for_debitcard_charges
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/bulk/BulkInsertRepositoryImpl.java: Lines 126
+
+Procedure Name: sp_get_loan_cc_accounts
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/bulk/BulkInsertRepositoryImpl.java: Lines 130
+
+Procedure Name: GET_CASA_INT_APPLICATION_ACCS
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/bulk/BulkInsertRepositoryImpl.java: Lines 134
+
+Procedure Name: sp_in_operative_marking
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/bulk/BulkInsertRepositoryImpl.java: Lines 137
+
+Procedure Name: sp_dormant_marking
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/bulk/BulkInsertRepositoryImpl.java: Lines 139
+
+Procedure Name: sp_casa_inoperative_bal_charges
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/bulk/BulkInsertRepositoryImpl.java: Lines 148
+
+Procedure Name: sp_td_interest_application
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/bulk/BulkInsertRepositoryImpl.java: Lines 152
+
+Procedure Name: sp_insert_td_balances
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/bulk/BulkInsertRepositoryImpl.java: Lines 156
+
+Procedure Name: sp_td_interest_application_bucketing
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/bulk/BulkInsertRepositoryImpl.java: Lines 159
+
+Procedure Name: update_loan_repayment_chart_post_interest_application
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/bulk/BulkInsertRepositoryImpl.java: Lines 162
+
+Procedure Name: sp_interest_accrual_pnr_pl_posting_pre_processing
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/bulk/BulkInsertRepositoryImpl.java: Lines 166
+
+Procedure Name: sp_update_policy_renew_details
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/bulk/BulkInsertRepositoryImpl.java: Lines 168
+
+Procedure Name: npa_provision_preprocessing
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/bulk/BulkInsertRepositoryImpl.java: Lines 171
+
+Procedure Name: sp_batch_insert_transaction_master
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/bulk/BulkInsertRepositoryImpl.java: Lines 176
+
+Procedure Name: sp_batch_insert_order_request
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/bulk/BulkInsertRepositoryImpl.java: Lines 182
+
+Procedure Name: sp_turing_clean
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/hash/HashDataRepositoryImpl.java: Lines 75
+
+Procedure Name: sp_casa_balance_check
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/casa/CasaRepositoryImpl.java: Lines 110
+
+Procedure Name: sp_dds_closure_calculation
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/casa/CasaRepositoryImpl.java: Lines 114
+
+Procedure Name: update_product_and_internal_account_balance
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/product/ProductTxnRepositoryImpl.java: Lines 160
+
+Procedure Name: sp_get_count_non_empty_preprocessing_tables
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/branchHandOver/BranchHandOverRepositoryImpl.java: Lines 79
+
+Procedure Name: sp_verify_pl_account
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/branchHandOver/BranchHandOverRepositoryImpl.java: Lines 104
+
+Procedure Name: sp_casa_interest_exception
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/branchHandOver/BranchHandOverRepositoryImpl.java: Lines 114
+
+Procedure Name: sp_reset_accrual
+Count: 1
+Occurrences:
+  - /Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/repository/branchHandOver/BranchHandOverRepositoryImpl.java: Lines 224
+

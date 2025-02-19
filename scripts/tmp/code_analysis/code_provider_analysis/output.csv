@@ -1,0 +1,5 @@
+File Path,Provider Name,Database Name
+/Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/provider/TransactionReadOnlyDataSourceProvider.java,TransactionReadOnlyDataSourceProvider,accountingreader
+/Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/provider/BsgDeepFreezeDataSourceProvider.java,BsgDeepFreezeDataSourceProvider,bsgdeepfreeze
+/Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/provider/BsgAccountingDataSourceProvider.java,BsgAccountingDataSourceProvider,bsgaccounting
+/Users/mrityunjoydey/Documents/github/ne-bank-cbs/turing-slice-cbs/cbs-transactions/app/api/bsgaccounting/provider/BsgSequencesAccountingDataSourceProvider.java,BsgSequencesAccountingDataSourceProvider,bsgaccounting

@@ -1,0 +1,53 @@
+{
+  "accountId": 11929778,
+  "caller": 4,
+  "customerId": null,
+  "eventAt": 1732215595170,
+  "eventName": "NEFT_EVENT",
+  "eventStatus": "success",
+  "eventStatusCode": null,
+  "eventStatusReason": null,
+  "metadata": {
+    "channelType": "M",
+    "cpAccountNumber": "3148397698",
+    "cpIfsc": null,
+    "cpName": "Sanjeev Kumar rooy",
+    "principalAccountNumber": "008711011000765",
+    "principalIfsc": null,
+    "remarks": "haba",
+    "rrn": "432618125279"
+  },
+  "onboardedOn": null,
+  "txnList": [
+    {
+      "accountId": 11929778,
+      "activityId": 1001,
+      "activitySubTypeId": 0,
+      "isSliceXAccount": true,
+      "isSliceXUser": true,
+      "createdDate": "2024-11-22 00:29:56",
+      "homeBranch": 87,
+      "id": 292492351,
+      "instrDate": "2024-11-22 00:29:56.0",
+      "instrNo": "000000",
+      "lastModifiedDate": "2024-11-22 00:29:56",
+      "narration": "Trf/432618125279/008711011000765/Dr/8042432718634/UTR No: NESFN24327001864/Ben:Sanjeev Kumar rooy",
+      "orderId": 5046032,
+      "txnAmount": 10000,
+      "txnBranch": 87,
+      "txnDate": "2024-11-22 00:00:00.0",
+      "txnNature": "D",
+      "txnPostingDate": "2024-11-22 00:00:00.0",
+      "txnRefNo": 8042432718634,
+      "txnSubRefNo": 8042432718635,
+      "accountNumber": "000225041006908",
+      "userId": "c893f162-21a2-42c9-a2c1-b1bd11ca33de",
+      "customerId": "380000211147",
+      "txnTime": 1732215596000,
+      "txnType": 2,
+      "txnValueDate": "2024-11-22 00:00:00.0"
+    }
+  ],
+  "txnOrderNo": "NEFT-432618125279-D-1732215595168",
+  "updatedAt": 1732215595170
+}

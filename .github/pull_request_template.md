@@ -12,7 +12,7 @@ List any dependencies that are required for this change.
 - [ ] This change requires a documentation update
 - [ ] Documentation update (no code changes, only markdown/comments/other docs)
 
-# How Has This Been Tested?
+# How Has This Been Tested
 
 Please describe the tests that you ran to verify your changes. 
 Provide instructions so we can reproduce. 

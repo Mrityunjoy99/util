@@ -1,0 +1,60 @@
+SP Name,Dependent Databases,Database Count
+sp_get_accounts_for_maintenance_charges_old,"BSGMASTER, BSGLOAN, BSGCORE, BSGADMIN, BSGACCOUNTING, BSGREMITTANCE",6
+sp_account_statement_bak20230713,"BSGDEEPFREEZE, BSGCORE, BSGTD, BSGADMIN, BSGACCOUNTING",5
+sp_account_statement_bkp_2023-05-01,"BSGDEEPFREEZE, BSGCORE, BSGTD, BSGADMIN, BSGACCOUNTING",5
+chargecollection_foliocharges,"BSGLOAN, BSGCORE, BSGADMIN, BSGACCOUNTING, BSGCRM",5
+chargecollection_minimumbalcharges,"BSGMASTER, BSGCORE, BSGADMIN, BSGACCOUNTING, BSGCRM",5
+sp_get_atm_charges,"BSGLOAN, BSGDEEPFREEZE, BSGCORE, BSGADMIN, BSGACCOUNTING",5
+chargecollection_loancommitmentcharges,"BSGLOAN, BSGCORE, BSGADMIN, BSGACCOUNTING, BSGCRM",5
+sp_account_statement_bak20240517,"BSGDEEPFREEZE, BSGCORE, BSGTD, BSGADMIN, BSGACCOUNTING",5
+sp_td_interest_application_2022_04_05,"BSGCORE, BSGTD, BSGADMIN, BSGACCOUNTING, BSGCRM",5
+chargecollection_minimumbalcharges_30012024,"BSGMASTER, BSGCORE, BSGADMIN, BSGACCOUNTING, BSGCRM",5
+sp_change_account_status_select,"BSGTURINGREPORTS, BSGDEEPFREEZE, BSGCORE, BSGTD, BSGACCOUNTING",5
+sp_td_interest_application_bak20200629,"BSGCORE, BSGTD, BSGADMIN, BSGACCOUNTING, BSGCRM",5
+getactiveaccountsbymobileno_backup,"BSGMASTER, BSGCRM, BSGLOAN, BSGCORE",4
+chargecollection_smscharges,"BSGCORE, BSGCRM, BSGADMIN, BSGACCOUNTING",4
+loan_auto_recovery_sp_bkp_20231220,"BSGCORE, BSGLOAN, BSGADMIN, BSGACCOUNTING",4
+sp_td_interest_accrual_2020_06-30,"MASTER, BSGTURING, BSGACCOUNTING, BSGTD",4
+chargecollection_gstupdate,"BSGCORE, BSGCRM, BSGACCOUNTING, BSGMASTER",4
+sp_td_interest_accrual,"MASTER, BSGTURING, BSGACCOUNTING, BSGTD",4
+loan_npa_identifcation_task_list_29012024,"BSGLOAN, BSGADMIN, BSGACCOUNTING, BSGDEEPFREEZE",4
+loan_auto_recovery_sp_bkp_20230610,"BSGCORE, BSGLOAN, BSGADMIN, BSGACCOUNTING",4
+mf_co_based_demand,"BSGCORE, BSGLOAN, BSGADMIN, BSGACCOUNTING",4
+getactiveaccountsbymobileno_test,"BSGMASTER, BSGCRM, BSGLOAN, BSGCORE",4
+sp_mf_co_based_demand,"BSGCORE, BSGLOAN, BSGADMIN, BSGACCOUNTING",4
+loan_auto_recovery_sp_bkp_20230429,"BSGCORE, BSGLOAN, BSGADMIN, BSGACCOUNTING",4
+updates_in_day_end,"BSGLOAN, BSGADMIN, BSGACCOUNTING",3
+getavgmonthlybalanceforcasa,"BSGCORE, MASTER, BSGACCOUNTING",3
+sma_identification,"BSGLOAN, BSGADMIN, BSGACCOUNTING",3
+sma_identification_bak20230110,"BSGLOAN, BSGADMIN, BSGACCOUNTING",3
+sma_identification_bak20230111,"BSGLOAN, BSGADMIN, BSGACCOUNTING",3
+chargecollection_validationcheck,"BSGCORE, BSGLOAN, BSGACCOUNTING",3
+sp_cc_special_adhoc,"BSGTURINGREPORTS, BSGLOAN, BSGACCOUNTING",3
+sp_account_mini_statement_08022023,"BSGCORE, BSGACCOUNTING, BSGDEEPFREEZE",3
+sp_insert_casa_balances_policy_renew_accounts,"BSGCORE, BSGACCOUNTING",2
+sp_dds_interest_on_closing_bal,"BSGCORE, BSGACCOUNTING",2
+sp_turing_testing_cheksum,"BSGCORE, BSGADMIN",2
+sp_kiosk_receipt_printing,"BSGADMIN, BSGACCOUNTING",2
+sp_balance_mismatch,"BSGCORE, BSGACCOUNTING",2
+sp_account_mini_statement_13122022,"BSGACCOUNTING, BSGDEEPFREEZE",2
+sp_last_transaction_backup,"BSGCORE, BSGACCOUNTING",2
+cashhandlingcharges,"BSGCORE, BSGACCOUNTING",2
+sp_transaction_error_report,"BSGCORE, BSGACCOUNTING",2
+sp_get_interest_recovery_amount,"BSGLOAN, BSGACCOUNTING",2
+calculate_overdue_loan_29012024,"BSGLOAN, BSGACCOUNTING",2
+npa_provision_details,"BSGLOAN, BSGACCOUNTING",2
+insert_token_no,"BSGMASTER, BSGACCOUNTING",2
+sp_upgraddiagrams,BSGACCOUNTING,1
+sp_cash_charges_not_authorized_legs,BSGACCOUNTING,1
+sp_creatediagram,BSGACCOUNTING,1
+sp_alterdiagram,BSGACCOUNTING,1
+sp_account_last_txn,BSGACCOUNTING,1
+sp_helpdiagramdefinition,BSGACCOUNTING,1
+sp_who2_updated,BSGACCOUNTING,1
+sp_test,BSGACCOUNTING,1
+strinkdatabase1,BSGACCOUNTING,1
+sp_helpdiagrams,BSGACCOUNTING,1
+sp_dump_datainto,BSGACCOUNTING,1
+sp_renamediagram,BSGACCOUNTING,1
+sp_dropdiagram,BSGACCOUNTING,1
+sp_who_updated,BSGACCOUNTING,1

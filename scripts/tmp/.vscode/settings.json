@@ -1,0 +1,8 @@
+{
+  "[csv]": {
+    "editor.inlayHints.maximumLength": 0
+  },
+  "[dynamic csv]": {
+    "editor.inlayHints.maximumLength": 0
+  }
+}

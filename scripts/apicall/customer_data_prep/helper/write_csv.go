@@ -1,0 +1,141 @@
+package helper
+
+import (
+	"encoding/csv"
+	"errors"
+	"fmt"
+	"os"
+	"reflect"
+	"sync"
+)
+
+type CSVWriter[T any] struct {
+	file       *os.File
+	writer     *csv.Writer
+	columns    []string
+	columnsSet map[string]bool
+	mutex      sync.Mutex
+}
+
+func NewCSVWriter[T any](filename string, appendMode bool) (*CSVWriter[T], error) {
+	var file *os.File
+	var err error
+
+	// Choose file mode based on the appendMode flag
+	if appendMode {
+		// Open file for appending, create if not exists
+		file, err = os.OpenFile(filename, os.O_APPEND|os.O_CREATE|os.O_RDWR, 0644)
+	} else {
+		// Create or override file
+		file, err = os.Create(filename)
+	}
+
+	if err != nil {
+		return nil, err
+	}
+
+	columns, err := extractHeaders[T]()
+	if err != nil {
+		return nil, err
+	}
+
+	writer := csv.NewWriter(file)
+
+	// If file is empty and we are overriding, write the headers
+	if !appendMode {
+		if err := writer.Write(columns); err != nil {
+			file.Close()
+			return nil, err
+		}
+	}
+
+	return &CSVWriter[T]{
+		file:       file,
+		writer:     writer,
+		columns:    columns,
+		columnsSet: createColumnSet(columns),
+	}, nil
+}
+
+// Write appends a new row to the CSV file, ensuring column consistency
+func (cw *CSVWriter[T]) Write(obj T) error {
+	cw.mutex.Lock()
+	defer cw.mutex.Unlock()
+
+	values, err := extractValues(obj, cw.columnsSet)
+	if err != nil {
+		return err
+	}
+
+	if err := cw.writer.Write(values); err != nil {
+		return err
+	}
+
+	cw.writer.Flush()
+	return nil
+}
+
+// Close closes the CSV file
+func (cw *CSVWriter[T]) Close() error {
+	cw.mutex.Lock()
+	defer cw.mutex.Unlock()
+
+	cw.writer.Flush()
+	return cw.file.Close()
+}
+
+// extractHeaders extracts struct field names as CSV headers
+func extractHeaders[T any]() ([]string, error) {
+	var headers []string
+	t := reflect.TypeOf((*T)(nil)).Elem() // Get type of T directly
+	if t.Kind() != reflect.Struct {
+		return nil, errors.New("type must be a struct")
+	}
+
+	for i := 0; i < t.NumField(); i++ {
+		headers = append(headers, t.Field(i).Tag.Get("json"))
+	}
+	return headers, nil
+}
+
+// extractValues extracts struct values in order of headers
+func extractValues[T any](obj T, expectedCols map[string]bool) ([]string, error) {
+	v := reflect.ValueOf(obj)
+	if v.Kind() != reflect.Struct {
+		return nil, errors.New("input must be a struct")
+	}
+
+	var values []string
+	for i := 0; i < v.Type().NumField(); i++ {
+		fieldName := v.Type().Field(i).Tag.Get("json")
+		if !expectedCols[fieldName] {
+			return nil, errors.New("column inconsistency detected")
+		}
+
+		fieldValue := v.Field(i)
+		switch fieldValue.Kind() {
+		case reflect.Float64:
+			// Format float64 to avoid scientific notation, keeping it readable
+			values = append(values, fmt.Sprintf("%.2f", fieldValue.Float()))
+		case reflect.Bool:
+			// For bool, just append as string
+			values = append(values, fmt.Sprintf("%v", fieldValue.Bool()))
+		case reflect.String:
+			// For string, just append the string value
+			values = append(values, fieldValue.String())
+		default:
+			// For other types, just use fmt.Sprint as a fallback
+			values = append(values, fmt.Sprint(fieldValue))
+		}
+	}
+	return values, nil
+}
+
+// createColumnSet creates a map for quick header validation
+func createColumnSet(columns []string) map[string]bool {
+	set := make(map[string]bool)
+	for _, col := range columns {
+		set[col] = true
+	}
+	return set
+}
