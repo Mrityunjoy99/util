@@ -57,7 +57,6 @@ func NewCSVWriter[T any](filename string, appendMode bool) (*CSVWriter[T], error
 	}, nil
 }
 
-
 // Write appends a new row to the CSV file, ensuring column consistency
 func (cw *CSVWriter[T]) Write(obj T) error {
 	cw.mutex.Lock()
@@ -112,7 +111,22 @@ func extractValues[T any](obj T, expectedCols map[string]bool) ([]string, error)
 		if !expectedCols[fieldName] {
 			return nil, errors.New("column inconsistency detected")
 		}
-		values = append(values, fmt.Sprint(v.Field(i)))
+
+		fieldValue := v.Field(i)
+		switch fieldValue.Kind() {
+		case reflect.Float64:
+			// Format float64 to avoid scientific notation, keeping it readable
+			values = append(values, fmt.Sprintf("%.2f", fieldValue.Float()))
+		case reflect.Bool:
+			// For bool, just append as string
+			values = append(values, fmt.Sprintf("%v", fieldValue.Bool()))
+		case reflect.String:
+			// For string, just append the string value
+			values = append(values, fieldValue.String())
+		default:
+			// For other types, just use fmt.Sprint as a fallback
+			values = append(values, fmt.Sprint(fieldValue))
+		}
 	}
 	return values, nil
 }
