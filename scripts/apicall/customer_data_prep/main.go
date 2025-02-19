@@ -17,25 +17,30 @@ import (
 	"gorm.io/gorm"
 )
 
-func getcustomerBalance(db *gorm.DB, accountId int) model.AccountBalance {
+func getcustomerBalance(db *gorm.DB, accountId int) (*model.AccountBalance, error) {
 	// Get customer balance
 	var accountBalance model.AccountBalance
-	db.Model(&accountBalance).Where("account_id = ?", accountId).Limit(1).Scan(&accountBalance)
-	return accountBalance
+	err := db.Model(&accountBalance).Where("account_id = ?", accountId).Limit(1).Scan(&accountBalance).Error
+	if err != nil {
+		return nil, fmt.Errorf("failed to get account balance: %w", err)
+	}
+	return &accountBalance, nil
 }
 
 func enhanceCustomerData(db *gorm.DB, ctx context.Context) {
 	// Define file paths for input, output, and metadata (JSON file)
 	inputFilePath := "/Users/mrityunjoydey/Documents/util/scripts/apicall/customer_data_prep/input/customer_list.csv"
 	outputFilePath := "/Users/mrityunjoydey/Documents/util/scripts/apicall/customer_data_prep/output/customer_list.csv"
+	failedFilePath := "/Users/mrityunjoydey/Documents/util/scripts/apicall/customer_data_prep/output/failed.csv"
 	metadataFilePath := "/Users/mrityunjoydey/Documents/util/scripts/apicall/customer_data_prep/metadata/metadata.json"
-	chenkSize := 100
+	chenkSize := 200
 
 	// Try to read the currentSeek from the metadata file
 	var (
-		currentSeek int64 = 0
-		csvWriter   *helper.CSVWriter[model.CustomerAccountDetails]
-		err         error
+		currentSeek  int64 = 0
+		csvWriter    *helper.CSVWriter[model.CustomerAccountDetails]
+		failedWriter *helper.CSVWriter[model.CustomerAccount]
+		err          error
 	)
 	if metadata, err := readMetadata(metadataFilePath); err == nil {
 		// If metadata file exists and is valid, use the saved currentSeek
@@ -53,9 +58,21 @@ func enhanceCustomerData(db *gorm.DB, ctx context.Context) {
 			fmt.Println("Error creating CSV writer:", err)
 			return
 		}
+
+		failedWriter, err = helper.NewCSVWriter[model.CustomerAccount](failedFilePath, false)
+		if err != nil {
+			fmt.Println("Error creating CSV writer:", err)
+			return
+		}
 	} else {
 		// Step 2: Read from the given seek, open the output file in append mode
 		csvWriter, err = helper.NewCSVWriter[model.CustomerAccountDetails](outputFilePath, true)
+		if err != nil {
+			fmt.Println("Error creating CSV writer:", err)
+			return
+		}
+
+		failedWriter, err = helper.NewCSVWriter[model.CustomerAccount](failedFilePath, true)
 		if err != nil {
 			fmt.Println("Error creating CSV writer:", err)
 			return
@@ -69,32 +86,38 @@ func enhanceCustomerData(db *gorm.DB, ctx context.Context) {
 	}
 
 	// Process the input file and write to the output file
-	processCSVChunks(ctx, db, itr, csvWriter, metadataFilePath)
+	processCSVChunks(ctx, db, itr, csvWriter, failedWriter, metadataFilePath)
 }
 
 // Helper function to process CSV chunks and handle termination signal
-func processCSVChunks(ctx context.Context, db *gorm.DB, itr *helper.Iterator[model.CustomerAccount], csvWriter *helper.CSVWriter[model.CustomerAccountDetails], metadataFilePath string) {
+func processCSVChunks(
+	ctx context.Context,
+	db *gorm.DB,
+	itr *helper.Iterator[model.CustomerAccount],
+	csvWriter *helper.CSVWriter[model.CustomerAccountDetails],
+	failedWriter *helper.CSVWriter[model.CustomerAccount],
+	metadataFilePath string,
+) {
+	defer func() {
+		err := saveMetadata(metadataFilePath, itr.GetCurrentRecord())
+		if err != nil {
+			fmt.Println("Error saving metadata:", err)
+		}
+	}()
+
 	for {
 		select {
 		case <-ctx.Done():
 			// Received termination signal, exit the loop and save current seek
 			fmt.Println("Received termination signal. Saving current seek position.")
-			// Save the current seek position to the metadata JSON file
-			metadata := metadata.Metadata{
-				CurrentSeek: itr.GetCurrentRecord(),
-			}
-
-			err := writeMetadata(metadataFilePath, metadata)
-			if err != nil {
-				fmt.Println("Error saving current seek position:", err)
-			}
 			return
 		default:
 			// Fetch a chunk from the iterator
 			chunk, ok := itr.Next()
 			if !ok {
 				// No more data to process
-				break
+				fmt.Println("No more data to process.")
+				return
 			}
 
 			// Process the chunk in parallel
@@ -104,16 +127,35 @@ func processCSVChunks(ctx context.Context, db *gorm.DB, itr *helper.Iterator[mod
 				go func(customer model.CustomerAccount) {
 					defer wg.Done()
 					// Get customer account details
-					customerAccountDetails := getCustomerAccountDetails(db, customer)
-					err := csvWriter.Write(customerAccountDetails)
+					customerAccountDetails, err := getCustomerAccountDetails(db, customer)
 					if err != nil {
-						fmt.Println("Error writing to CSV:", err)
+						fmt.Println("Error getting customer account details:", err)
+						failedWriter.Write(customer)
+					} else {
+						err = csvWriter.Write(*customerAccountDetails)
+						if err != nil {
+							fmt.Println("Error writing to CSV:", err)
+						}
 					}
+
 				}(customer)
 			}
 			wg.Wait()
 		}
 	}
+}
+
+func saveMetadata(metadataFilePath string, currentSeek int64) error {
+	// Save the current seek position to the metadata JSON file
+	metadata := metadata.Metadata{
+		CurrentSeek: currentSeek,
+	}
+
+	err := writeMetadata(metadataFilePath, metadata)
+	if err != nil {
+		return fmt.Errorf("failed to save current seek position: %w", err)
+	}
+	return nil
 }
 
 // Read the metadata from the JSON file
@@ -150,18 +192,22 @@ func writeMetadata(metadataFilePath string, metadata metadata.Metadata) error {
 	return nil
 }
 
-func getCustomerAccountDetails(db *gorm.DB, customer model.CustomerAccount) model.CustomerAccountDetails {
+func getCustomerAccountDetails(db *gorm.DB, customer model.CustomerAccount) (*model.CustomerAccountDetails, error) {
 	// Get customer balance
 	fmt.Println("Getting balance for account:", customer)
-	balance := getcustomerBalance(db, customer.AccountId)
-	return model.CustomerAccountDetails{
+	balance, err := getcustomerBalance(db, customer.AccountId)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get balance for account: %w", err)
+	}
+
+	return &model.CustomerAccountDetails{
 		AccountNo:           customer.AccountNo,
 		AccountId:           customer.AccountId,
 		CheckerClearBalance: balance.CheckerClearBalance,
 		AvailableBalance:    balance.AvailableBalance,
 		LatestTxnDate:       balance.LatestTxnDate.Format("2006-01-02"),
 		ZeroBalance:         balance.CheckerClearBalance == 0,
-	}
+	}, nil
 }
 
 func main() {

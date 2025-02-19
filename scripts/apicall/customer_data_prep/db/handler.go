@@ -3,6 +3,7 @@ package db
 import (
 	"fmt"
 	"log"
+	"time"
 
 	"gorm.io/driver/sqlserver"
 	"gorm.io/gorm"
@@ -26,12 +27,23 @@ func GetDefaultDB() (*gorm.DB, error) {
 	}
 
 	// Connect to the database using GORM
-	db, err := gorm.Open(sqlserver.Open(dsn), &gormConfig)
+	dbObj, err := gorm.Open(sqlserver.Open(dsn), &gormConfig)
 	if err != nil {
 		log.Fatalf("Failed to connect to database: %v", err)
 		return nil, err
 	}
 	fmt.Println("Connected to MSSQL successfully!")
 
-	return db, nil
+	db, err := dbObj.DB()
+	if err != nil {
+		log.Fatalf("Failed to get DB object: %v", err)
+		return nil, err
+	}
+
+	db.SetConnMaxIdleTime(30*time.Second)
+	db.SetConnMaxLifetime(10 * time.Minute)
+	db.SetMaxIdleConns(200)
+	db.SetMaxOpenConns(200)
+
+	return dbObj, nil
 }
